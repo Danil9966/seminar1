@@ -15,8 +15,8 @@ public class MergingIncreasingIterator implements Iterator<Integer> {
 
     private IncreasingIterator first;
     private IncreasingIterator second;
-    private Integer one;
-    private Integer two;
+    private Integer one=null;
+    private Integer two=null;
     public MergingIncreasingIterator(IncreasingIterator first, IncreasingIterator second) {
         this.first = first;
         this.second = second;
@@ -34,9 +34,12 @@ public class MergingIncreasingIterator implements Iterator<Integer> {
     @Override
     public Integer next() {
         int tmp1;
-        if(one==null){tmp1= second.next();}
-        if(two==null){tmp1=first.next();}
-        if(one>two) {
+        if(one==null)
+            tmp1= second.next();
+        else if(two==null)
+            tmp1=first.next();
+
+        else if(one>two) {
             tmp1=two;
             if(second.hasNext())
             two=second.next();
